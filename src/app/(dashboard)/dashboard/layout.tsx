@@ -30,21 +30,21 @@ export default function DashboardLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProtection>
-          <div className="flex h-screen bg-background">
-            {/* Sidebar */}
-            <DashboardSidebar 
-              isOpen={sidebarOpen} 
-              onToggle={() => setSidebarOpen(!sidebarOpen)} 
-            />
-            
-            {/* Main content */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-              <DashboardHeader onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-              <main className="flex-1 overflow-y-auto p-4 lg:p-6">
-                {children}
-              </main>
-            </div>
+        <div className="flex h-screen bg-background">
+          {/* Sidebar */}
+          <DashboardSidebar 
+            isOpen={sidebarOpen} 
+            onToggle={() => setSidebarOpen(!sidebarOpen)} 
+          />
+          
+          {/* Main content */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <DashboardHeader onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+            <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+              {children}
+            </main>
           </div>
+        </div>
         </AuthProtection>
       </body>
     </html>

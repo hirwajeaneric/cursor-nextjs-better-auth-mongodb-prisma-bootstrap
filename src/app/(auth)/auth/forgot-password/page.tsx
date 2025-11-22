@@ -34,11 +34,11 @@ export default function ForgotPasswordPage() {
 
       if (!response.ok || result.error) {
         toast.error(result.error?.message || "Failed to send reset email");
-        setIsLoading(false);
+    setIsLoading(false);
         return;
       }
 
-      setIsSubmitted(true);
+    setIsSubmitted(true);
       toast.success("Password reset email sent! Please check your inbox.");
     } catch {
       toast.error("An error occurred. Please try again.");
