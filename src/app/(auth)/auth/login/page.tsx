@@ -48,8 +48,16 @@ export default function LoginPage() {
     }
   };
 
-  const handleSocialSignIn = (provider: "google" | "github") => {
-    window.location.href = `/api/auth/sign-in/social?provider=${provider}&callbackURL=${encodeURIComponent("/dashboard")}`;
+  const handleSocialSignIn = async (provider: "google" | "github") => {
+    try {
+      await signIn.social({
+        provider,
+        callbackURL: "/dashboard",
+      });
+    } catch (error) {
+      toast.error("Failed to initiate social sign in");
+      console.error("Social sign in error:", error);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

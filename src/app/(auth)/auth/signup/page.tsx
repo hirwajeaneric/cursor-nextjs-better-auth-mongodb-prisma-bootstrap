@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle, Github } from "lucide-react";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
 
 export default function SignUpPage() {
@@ -61,9 +61,17 @@ export default function SignUpPage() {
     }
   };
 
-  const handleSocialSignUp = (provider: "google" | "github") => {
-    // Better Auth uses sign-in/social for both sign-up and sign-in with social providers
-    window.location.href = `/api/auth/sign-in/social?provider=${provider}&callbackURL=${encodeURIComponent("/dashboard")}`;
+  const handleSocialSignUp = async (provider: "google" | "github") => {
+    try {
+      // Better Auth uses signIn.social for both sign-up and sign-in with social providers
+      await signIn.social({
+        provider,
+        callbackURL: "/dashboard",
+      });
+    } catch (error) {
+      toast.error("Failed to initiate social sign up");
+      console.error("Social sign up error:", error);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
