@@ -62,7 +62,8 @@ export default function SignUpPage() {
   };
 
   const handleSocialSignUp = (provider: "google" | "github") => {
-    window.location.href = `/api/auth/sign-up/social?provider=${provider}&callbackURL=${encodeURIComponent("/dashboard")}`;
+    // Better Auth uses sign-in/social for both sign-up and sign-in with social providers
+    window.location.href = `/api/auth/sign-in/social?provider=${provider}&callbackURL=${encodeURIComponent("/dashboard")}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
